@@ -1,4 +1,5 @@
 #include "player.h"
+#include "game.h"
 #include "globals.h"
 
 Player::Player ()
@@ -12,7 +13,8 @@ Player::Player ()
 	  rateOfFire(5), // shots per second
 	  timeLastShot(G::clock.GetElapsedTime()),
 	  img(),
-	  sprite()
+	  sprite(),
+	  radius(16)
 {
 	img.LoadFromFile("media/player.tga");
 	sprite.SetImage(img);
@@ -22,7 +24,7 @@ Player::Player ()
 	// of 96. We use this to size the sprite according to how large we want
 	// the circular bit to appear.
 	float scale = 128.0 / 96.0;
-	sprite.Resize(32 * scale, 32 * scale);
+	sprite.Resize(2 * radius * scale, 2 * radius * scale);
 }
 
 void Player::update() {
@@ -59,18 +61,19 @@ void Player::update() {
 	pos += vel;
 
 	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );
-	angle = -1 * (mouse - pos).angle();
+	angle = (mouse - pos).angle();
 
 	if (G::input.IsMouseButtonDown(sf::Mouse::Left))
 		tryToShoot();
 }
 
 bool Player::tryToShoot() {
-	printf("pew\n");
+	G::gameScreen->bullet = new Bullet(pos+ph::vec2f::polar(radius, angle),
+	                                   vel + ph::vec2f::polar(10, angle));
 }
 
 void Player::render() {
 	sprite.SetPosition(pos);
-	sprite.SetRotation(angle);
+	sprite.SetRotation(-angle); // SFML angles are opposite to expected.
 	G::window.Draw(sprite);
 }
