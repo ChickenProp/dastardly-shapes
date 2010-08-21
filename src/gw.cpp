@@ -7,6 +7,7 @@ void handleEvent(sf::Event e);
 
 int main (int argc, char **argv) {
 	G::window.Create(sf::VideoMode(640, 480, 32), "GW");
+	G::window.SetFramerateLimit(G::framerate);
 
 	G::gameScreen = new Game();
 	G::curScreen = G::gameScreen;

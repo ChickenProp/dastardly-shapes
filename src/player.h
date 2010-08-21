@@ -13,6 +13,8 @@ public:
 	ph::vec2f pos;
 	ph::vec2f vel;
 	ph::vec2f acc;
+	float maxSpeed;
+	float timeToHalf;
 
 	int ammo;
 

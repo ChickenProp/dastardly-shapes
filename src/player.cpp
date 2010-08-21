@@ -5,6 +5,8 @@ Player::Player ()
 	: pos(320,240),
 	  vel(0,0),
 	  acc(0,0),
+	  maxSpeed(640), // pixels per second
+	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
 	  img(),
 	  sprite()
 {
@@ -24,7 +26,23 @@ void Player::update() {
 	if (G::input.IsKeyDown(sf::Key::Down))
 	        acc += ph::vec2f(0, 1);
 
-	acc = acc.normalize()*0.05;
+	acc = acc.normalize();
+
+	/* The player causes us to accelerate at a rate of A. Friction causes us
+	   to deccelerate at a rate of B*v, where v is our current velocity. If
+	   v = M, where M is our max speed, we require no acceleration. So B =
+	   A/M, and velocity is given by the differential equation
+	       dv/dt = A - v * A/M
+	   where v=0 when t=0, and v=M/2 when t=T.
+
+	   Solving this gives us A = M/T * ln(2).	   
+	*/
+
+	float M = maxSpeed / G::framerate;
+	float T = timeToHalf * G::framerate;
+	float A = M_LN2 * M / T;
+
+	acc = acc * A - vel * A / M;
 
 	vel += acc;
 	pos += vel;	
