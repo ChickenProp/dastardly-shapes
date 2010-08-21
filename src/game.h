@@ -5,6 +5,7 @@
 #include "screen.h"
 #include "player.h"
 #include "bullet.h"
+#include "enemy-manager.h"
 
 class Game : public Screen {
 public:
@@ -16,7 +17,11 @@ public:
 	void handleEvent(sf::Event e);
 
 	Player *player;
-	Bullet *bullet;
+
+	void addBullet(Bullet* bullet);
+	std::vector<Bullet*> bullets;
+
+	EnemyMgr *enemies;
 };
 
 #endif

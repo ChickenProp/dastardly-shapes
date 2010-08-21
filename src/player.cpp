@@ -68,8 +68,9 @@ void Player::update() {
 }
 
 bool Player::tryToShoot() {
-	G::gameScreen->bullet = new Bullet(pos+ph::vec2f::polar(radius, angle),
-	                                   vel + ph::vec2f::polar(10, angle));
+	Bullet *bullet = new Bullet(pos + ph::vec2f::polar(radius, angle),
+	                            vel + ph::vec2f::polar(10, angle));
+	G::gameScreen->addBullet(bullet);
 }
 
 void Player::render() {
