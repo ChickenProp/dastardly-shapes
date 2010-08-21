@@ -9,6 +9,7 @@ class Game;
 class G {
 public:
 	static sf::RenderWindow window;
+	static const sf::Input &input;
 
 	static Screen *curScreen;
 	static Game *gameScreen;
