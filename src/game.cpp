@@ -1,5 +1,11 @@
 #include "game.h"
 
-Game::Game() {}
+Game::Game()
+	: player(new Player())
+{}
+
 void Game::update() {}
-void Game::render() {}
+
+void Game::render() {
+	player->render();
+}
