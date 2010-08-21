@@ -21,21 +21,5 @@ int main (int argc, char **argv) {
 		G::window.Clear();
 		G::curScreen->render();
 		G::window.Display();
-
-		handleEvents();
-	}
-}
-
-void handleEvents () {
-	sf::Event e;
-	while (G::window.GetEvent(e))
-		handleEvent(e);
-}
-
-void handleEvent(sf::Event e) {
-	switch(e.Type) {
-	case sf::Event::Closed:
-		G::window.Close();
-		break;
 	}
 }
