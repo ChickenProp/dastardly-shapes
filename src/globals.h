@@ -3,8 +3,9 @@
 
 #include "includes.h"
 
-class Screen;
-class Game;
+struct Screen;
+struct Game;
+struct Player;
 
 class G {
 public:
@@ -18,8 +19,11 @@ public:
 	static Screen *curScreen;
 	static Game *gameScreen;
 
+	static Player *player();
+
 	struct Images {
 		static sf::Image bullet;
+		static sf::Image enemy_circle;
 	};
 
 	static bool loadImages();

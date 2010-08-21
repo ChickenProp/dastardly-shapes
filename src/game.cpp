@@ -20,6 +20,8 @@ void Game::update() {
 
 		(*it)->update();
 	}
+
+	enemies->update();
 }
 
 void Game::render() {
@@ -33,6 +35,8 @@ void Game::render() {
 
 		(*it)->render();
 	}
+
+	enemies->render();
 }
 
 void Game::addBullet(Bullet *bullet) {
