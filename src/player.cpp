@@ -7,11 +7,19 @@ Player::Player ()
 	  acc(0,0),
 	  maxSpeed(640), // pixels per second
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
+	  angle(0),
 	  img(),
 	  sprite()
 {
 	img.LoadFromFile("media/player.tga");
 	sprite.SetImage(img);
+	sprite.SetCenter(64, 64);
+
+	// The image has a diameter of 128, and the circular bit has a diameter
+	// of 96. We use this to size the sprite according to how large we want
+	// the circular bit to appear.
+	float scale = 128.0 / 96.0;
+	sprite.Resize(32 * scale, 32 * scale);
 }
 
 void Player::update() {
@@ -45,10 +53,14 @@ void Player::update() {
 	acc = acc * A - vel * A / M;
 
 	vel += acc;
-	pos += vel;	
+	pos += vel;
+
+	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );
+	angle = -1 * (mouse - pos).angle();
 }
 
 void Player::render() {
 	sprite.SetPosition(pos);
+	sprite.SetRotation(angle);
 	G::window.Draw(sprite);
 }

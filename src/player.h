@@ -16,6 +16,8 @@ public:
 	float maxSpeed;
 	float timeToHalf;
 
+	float angle;
+
 	int ammo;
 
 	void update();
