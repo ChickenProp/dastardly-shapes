@@ -19,6 +19,9 @@ public:
 	float angle;
 
 	int ammo;
+	int rateOfFire;
+	int timeLastShot;
+	bool tryToShoot();
 
 	void update();
 	void render();

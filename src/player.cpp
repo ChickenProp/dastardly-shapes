@@ -8,6 +8,9 @@ Player::Player ()
 	  maxSpeed(640), // pixels per second
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
 	  angle(0),
+	  ammo(100),
+	  rateOfFire(5), // shots per second
+	  timeLastShot(G::clock.GetElapsedTime()),
 	  img(),
 	  sprite()
 {
@@ -57,6 +60,13 @@ void Player::update() {
 
 	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );
 	angle = -1 * (mouse - pos).angle();
+
+	if (G::input.IsMouseButtonDown(sf::Mouse::Left))
+		tryToShoot();
+}
+
+bool Player::tryToShoot() {
+	printf("pew\n");
 }
 
 void Player::render() {
