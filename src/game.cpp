@@ -4,7 +4,9 @@ Game::Game()
 	: player(new Player())
 {}
 
-void Game::update() {}
+void Game::update() {
+	player->update();
+}
 
 void Game::render() {
 	player->render();

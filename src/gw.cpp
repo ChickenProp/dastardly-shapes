@@ -13,6 +13,8 @@ int main (int argc, char **argv) {
 
 	while (G::window.IsOpened()) {
 		G::curScreen->update();
+
+		G::window.Clear();
 		G::curScreen->render();
 		G::window.Display();
 
