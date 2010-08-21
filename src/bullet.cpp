@@ -6,8 +6,8 @@ Bullet::Bullet (ph::vec2f pos, ph::vec2f vel)
 	  vel(vel),
 	  sprite(G::Images::bullet)
 {
+	sprite.SetCenter(16, 16); // the image is 32x32
 	sprite.Resize(10,10);
-	sprite.SetCenter(5,5);
 }
 
 void Bullet::update () {
