@@ -17,6 +17,12 @@ public:
 
 	static Screen *curScreen;
 	static Game *gameScreen;
+
+	struct Images {
+		static sf::Image bullet;
+	};
+
+	static bool loadImages();
 };
 
 #endif

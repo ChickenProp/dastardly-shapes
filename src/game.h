@@ -3,6 +3,7 @@
 
 #include "screen.h"
 #include "player.h"
+#include "bullet.h"
 
 class Game : public Screen {
 public:
@@ -11,6 +12,7 @@ public:
 	void render();
 
 	Player *player;
+	Bullet *bullet;
 };
 
 #endif
