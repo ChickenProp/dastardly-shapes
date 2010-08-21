@@ -10,7 +10,9 @@ class G {
 public:
 	static sf::RenderWindow window;
 	static const sf::Input &input;
-	
+
+	static sf::Clock clock;
+
 	static int framerate;
 
 	static Screen *curScreen;
