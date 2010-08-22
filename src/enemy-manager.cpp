@@ -1,4 +1,5 @@
 #include "enemy-manager.h"
+#include "globals.h"
 #include "e-circle.h"
 
 EnemyMgr::EnemyMgr()
@@ -47,10 +48,19 @@ void EnemyMgr::render () {
 }
 
 void EnemyMgr::newWave () {
-	for (int i = 0; i < 100; i++)
-		list.push_back(new E_Circle(ph::vec2f(100, 100)));
+	for (int i = 0; i < 20; i++)
+		list.push_back(new E_Circle(randomCornerPosition()));
 
-	numLiveEnemies += 100;
+	numLiveEnemies += 20;
 	timeToWave = 10;
 	waveClock.Reset();
+}
+
+ph::vec2f EnemyMgr::randomCornerPosition () {
+	float c = 50;
+	ph::vec2f offset = ph::vec2f::polar(ph::randf(c), ph::randf(360));
+	ph::vec2f corner( (ph::randi(2) ? c : G::window.GetWidth() - c),
+	                  (ph::randi(2) ? c : G::window.GetHeight() - c) );
+
+	return offset + corner;
 }

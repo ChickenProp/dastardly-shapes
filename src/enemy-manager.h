@@ -20,6 +20,8 @@ public:
 	float timeToWave;
 	sf::Clock waveClock;
 	int waveCount;
+
+	ph::vec2f randomCornerPosition();
 };
 
 #endif
