@@ -76,11 +76,11 @@ void EnemyMgr::newWave () {
 		ph::vec2f pos = randomCornerPosition();
 
 		Enemy *en = NULL;
-		int type = ph::randi(ph::max(waveDifficulty/10, 1));
+		int type = ph::randi(ph::max(waveDifficulty/10, 1)) + 1;
 		switch (type) {
-		case 0: en = new E_Circle(pos); break;
-		case 1: en = new E_Triangle(pos); break;
-		case 2: en = new E_Square(pos); break;
+		case 1: en = new E_Circle(pos); break;
+		case 2: en = new E_Triangle(pos); break;
+		case 3: en = new E_Square(pos); break;
 		}
 
 		upcoming.push_back(en);
