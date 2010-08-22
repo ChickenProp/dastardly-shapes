@@ -13,7 +13,7 @@ public:
 	Enemy();
 
 	int health;
-	int ammoValue;
+	int ammoCount;
 
 	bool dead;
 	float diedAt;

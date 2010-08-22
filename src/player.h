@@ -4,8 +4,12 @@
 #include "includes.h"
 #include "entity.h"
 
+class Enemy;
+
 class Player : public Entity {
 public:
+	typedef Entity super;
+
 	Player();
 
 	ph::vec2f acc;
@@ -18,6 +22,8 @@ public:
 	bool tryToShoot();
 
 	void update();
+
+	void hitEnemy(Enemy *enemy);
 };
 
 #endif

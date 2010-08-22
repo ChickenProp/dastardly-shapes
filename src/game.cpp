@@ -74,11 +74,11 @@ void Game::handleCollisions() {
 	for(std::vector<Enemy*>::iterator it = enemies->list.begin();
 	    it != enemies->list.end(); it++)
 	{
-		if (! *it)
+		if (Entity::deadPtr(*it))
 			continue;
 
 		if ((*it)->colliding(player))
-			exit(1);
+			player->hitEnemy(*it);
 
 		if ((*it)->dead)
 			continue;

@@ -16,6 +16,7 @@ public:
 
 	bool trash;
 	void markTrash();
+	static bool deadPtr(Entity *ptr);
 
 	virtual void update();
 	virtual void render();

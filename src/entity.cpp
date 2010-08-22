@@ -9,6 +9,10 @@ void Entity::markTrash () {
 	trash = true;
 }
 
+bool Entity::deadPtr (Entity *ptr) {
+	return !ptr || ptr->trash;
+}
+
 void Entity::update () {
 	if (trash) return;
 }

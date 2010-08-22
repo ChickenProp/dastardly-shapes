@@ -67,3 +67,10 @@ bool Player::tryToShoot() {
 	                            vel + ph::vec2f::polar(10, angle));
 	G::gameScreen->addBullet(bullet);
 }
+
+void Player::hitEnemy(Enemy *enemy) {
+	if (! enemy->dead)
+		exit(1);
+	else
+		ammo += enemy->ammoCount;
+}
