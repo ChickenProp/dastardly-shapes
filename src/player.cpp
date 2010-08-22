@@ -58,26 +58,41 @@ void Player::update() {
 	vel += acc;
 	pos += vel;
 
+	bool bounce = false;
+	float bounceVel = 0;
 	int width = G::window.GetWidth();
 	int height = G::window.GetHeight();
 	float rest = 0.8f;
 
 	if (pos.x - radius <= 0) {
 		vel = ph::vec2f(-vel.x*rest, vel.y);
+		bounceVel = fabs(vel.x);
 		pos.x = radius;
+		bounce = true;
 	}
 	else if (pos.x + radius >= width) {
 		vel = ph::vec2f(-vel.x*rest, vel.y);
+		bounceVel = fabs(vel.x);
 		pos.x = width - radius;
+		bounce = true;
 	}
 
 	if (pos.y - radius <= 0) {
 		vel = ph::vec2f(vel.x, -vel.y*rest);
+		bounceVel = fabs(vel.y);
 		pos.y = radius;
+		bounce = true;
 	}
 	else if (pos.y + radius >= height) {
 		vel = ph::vec2f(vel.x, -vel.y*rest);
+		bounceVel = fabs(vel.y);
 		pos.y = height - radius;
+		bounce = true;
+	}
+
+	if (bounce && bounceVel >= 0.5) {
+		Sound::play(Sound::bounce, false, 1.0f,
+		            ph::min(bounceVel - 0.5f, 3.f) * 100.f / 3.f);
 	}
 
 	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );

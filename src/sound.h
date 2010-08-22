@@ -11,6 +11,7 @@ public:
 	static std::list<sf::Sound*> sounds;
 
 	static sf::SoundBuffer *shoot;
+	static sf::SoundBuffer *bounce;
 	static sf::SoundBuffer *newWave;
 	static sf::SoundBuffer *pickupEnemy;
 	static sf::SoundBuffer *enemyKill;
