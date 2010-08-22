@@ -14,6 +14,8 @@ bool Entity::deadPtr (Entity *ptr) {
 }
 
 void Entity::update () {
+	// obviously this won't return from the caller, so we need to check for
+	// trash there as well.
 	if (trash) return;
 }
 

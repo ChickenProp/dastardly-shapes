@@ -25,10 +25,26 @@ void Enemy::die() {
 	diedAt = G::clock.GetElapsedTime();
 	sprite.SetColor(sf::Color(128, 128, 128));
 }
+	
+float Enemy::deadTime() {
+	return G::clock.GetElapsedTime() - diedAt;
+}
 
 void Enemy::update() {
 	super::update();
 
-	if (dead && G::clock.GetElapsedTime() - diedAt > 2)
+	if (dead && deadTime() > corpseLife) {
+		printf("enemy dies\n");
 		markTrash();
+	}
+}
+
+void Enemy::render() {
+	// Make it die before hitting 0 visibility, or we won't be able to see
+	// it for some of its dead-time.
+	if (dead)
+		sprite.SetColor(sf::Color(128, 128, 128,
+		                          255 - (200*deadTime()/corpseLife)));
+
+	super::render();
 }

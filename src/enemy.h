@@ -17,11 +17,14 @@ public:
 
 	bool dead;
 	float diedAt;
+	float corpseLife;
+	float deadTime();
 
 	void checkBulletCollisions(const std::vector<Bullet*> &bullets);
 	void die();
 
 	virtual void update();
+	virtual void render();
 };
 
 #endif

@@ -5,6 +5,7 @@
 E_Circle::E_Circle (ph::vec2f _pos) {
 	pos = _pos;
 	radius = 8;
+	corpseLife = 10;
 	sprite.SetImage(G::Images::enemy_circle);
 	sprite.SetCenter(64, 64); // the image is 128x128
 	sprite.Resize(radius*2, radius*2);

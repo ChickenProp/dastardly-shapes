@@ -71,6 +71,8 @@ bool Player::tryToShoot() {
 void Player::hitEnemy(Enemy *enemy) {
 	if (! enemy->dead)
 		exit(1);
-	else
+	else {
 		ammo += enemy->ammoCount;
+		enemy->markTrash();
+	}
 }
