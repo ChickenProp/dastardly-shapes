@@ -10,6 +10,9 @@ public:
 
 	std::vector<Enemy*> list;
 
+	sf::Sprite glow;
+	std::vector<Enemy*> upcoming;
+
 	void update();
 	void render();
 
@@ -17,6 +20,8 @@ public:
 	int numLiveEnemies;
 
 	void newWave();
+	void vivifyWave();
+	bool unvivifiedWave;
 	float timeToWave;
 	sf::Clock waveClock;
 	int waveCount;

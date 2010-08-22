@@ -19,9 +19,10 @@ public:
 	float diedAt;
 	float corpseLife;
 	float deadTime();
+	void die();
 
 	void checkBulletCollisions(const std::vector<Bullet*> &bullets);
-	void die();
+	void getHit();
 
 	virtual void update();
 	virtual void render();

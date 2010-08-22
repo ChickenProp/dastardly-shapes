@@ -27,8 +27,10 @@ public:
 		static sf::Image backdrop;
 		static sf::Image player;
 		static sf::Image bullet;
+		static sf::Image glow;
 		static sf::Image enemy_circle;
 		static sf::Image enemy_triangle;
+		static sf::Image enemy_square;
 	};
 
 	static bool loadImages();

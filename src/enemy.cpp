@@ -5,7 +5,8 @@
 #include "sound.h"
 
 Enemy::Enemy ()
-	: dead(0)
+	: dead(0),
+	  health(1) // default
 {}
 
 void Enemy::checkBulletCollisions(const std::vector<Bullet*> &bullets) {
@@ -16,9 +17,17 @@ void Enemy::checkBulletCollisions(const std::vector<Bullet*> &bullets) {
 		if (! bullets[i] || ! colliding(bullets[i]))
 			continue;
 
-		die();
+		getHit();
 		bullets[i]->markTrash();
 	}
+}
+
+void Enemy::getHit () {
+	health--;
+	if (health <= 0)
+		die();
+	else
+	Sound::play(Sound::enemyHit);
 }
 
 void Enemy::die() {

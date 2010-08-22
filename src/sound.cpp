@@ -6,6 +6,7 @@ sf::SoundBuffer *Sound::shoot;
 sf::SoundBuffer *Sound::bounce;
 sf::SoundBuffer *Sound::newWave;
 sf::SoundBuffer *Sound::pickupEnemy;
+sf::SoundBuffer *Sound::enemyHit;
 sf::SoundBuffer *Sound::enemyKill;
 
 void Sound::play(sf::SoundBuffer *buf, bool loop, float pitch, float vol) {
@@ -28,5 +29,6 @@ void Sound::loadSounds () {
 	LOADSOUND(bounce, "bounce");
 	LOADSOUND(newWave, "new-wave");
 	LOADSOUND(pickupEnemy, "pickup-enemy");
+	LOADSOUND(enemyHit, "enemy-hit");
 	LOADSOUND(enemyKill, "enemy-kill");
 }

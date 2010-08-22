@@ -14,6 +14,7 @@ public:
 	static sf::SoundBuffer *bounce;
 	static sf::SoundBuffer *newWave;
 	static sf::SoundBuffer *pickupEnemy;
+	static sf::SoundBuffer *enemyHit;
 	static sf::SoundBuffer *enemyKill;
 };
 

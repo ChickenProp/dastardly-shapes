@@ -2,14 +2,21 @@
 #include "globals.h"
 #include "e-circle.h"
 #include "e-triangle.h"
+#include "e-square.h"
 #include "sound.h"
 
 EnemyMgr::EnemyMgr()
 	: list(),
+	  upcoming(),
+	  glow(),
 	  numLiveEnemies(0),
 	  waveCount(0),
 	  waveClock()
 {
+	glow.SetImage(G::Images::glow);
+	glow.SetCenter(64, 64);
+	glow.Resize(30, 30);
+
 	newWave();
 }
 
@@ -23,6 +30,9 @@ void EnemyMgr::enemyDied(Enemy *which) {
 void EnemyMgr::update () {
 	if (waveClock.GetElapsedTime() > timeToWave)
 		newWave();
+
+	if (unvivifiedWave && waveClock.GetElapsedTime() >= 1)
+		vivifyWave();
 
 	for(int i = 0; i < list.size(); i++) {
 		if (! list[i])
@@ -47,15 +57,36 @@ void EnemyMgr::render () {
 
 		(*it)->render();
 	}
+
+	if (!unvivifiedWave)
+		return;
+
+	for (int i = 0; i < upcoming.size(); i++) {
+		glow.SetPosition(upcoming[i]->pos);
+		float alpha = waveClock.GetElapsedTime() * 255;
+		float size = 64 - waveClock.GetElapsedTime() * 35;
+		glow.SetColor(sf::Color(255, 255, 255, alpha));
+		glow.Resize(size, size);
+		G::window.Draw(glow);
+	}		
 }
 
 void EnemyMgr::newWave () {
 	for (int i = 0; i < 5; i++)
-		list.push_back(new E_Triangle(randomCornerPosition()));
+		upcoming.push_back(new E_Square(randomCornerPosition()));
 
-	numLiveEnemies += 5;
+	unvivifiedWave = true;
 	timeToWave = 20;
 	waveClock.Reset();
+}
+
+void EnemyMgr::vivifyWave () {
+	for (int i = 0; i < upcoming.size(); i++)
+		list.push_back(upcoming[i]);
+
+	numLiveEnemies += upcoming.size();
+	upcoming.clear();
+	unvivifiedWave = false;
 
 	Sound::play(Sound::newWave);
 }
