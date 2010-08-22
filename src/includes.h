@@ -3,9 +3,11 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Audio.hpp>
 
 #include "ph-utils/vector.h"
 
 #include <vector>
+#include <list>
 
 #endif

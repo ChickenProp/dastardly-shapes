@@ -1,10 +1,12 @@
 #include "player.h"
 #include "game.h"
 #include "globals.h"
+#include "sound.h"
 
 Player::Player ()
 	: maxSpeed(640), // pixels per second
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
+	  maxAmmo(100),
 	  ammo(100),
 	  rateOfFire(5), // shots per second
 	  rateOfDryFire(1), // shots per second
@@ -80,6 +82,8 @@ void Player::shoot() {
 	shotClock.Reset();
 
 	printf("ammo: %d\n", ammo);
+
+	Sound::play(Sound::shoot, false, 2.0 - (float)ammo/maxAmmo);
 }
 
 void Player::hitEnemy(Enemy *enemy) {
@@ -87,6 +91,8 @@ void Player::hitEnemy(Enemy *enemy) {
 		exit(1);
 	else {
 		ammo += enemy->ammoCount;
+		ammo = ph::min(ammo, maxAmmo);
 		enemy->markTrash();
+		Sound::play(Sound::pickupEnemy);
 	}
 }

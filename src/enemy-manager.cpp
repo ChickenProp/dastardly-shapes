@@ -1,6 +1,7 @@
 #include "enemy-manager.h"
 #include "globals.h"
 #include "e-circle.h"
+#include "sound.h"
 
 EnemyMgr::EnemyMgr()
 	: list(),
@@ -54,6 +55,8 @@ void EnemyMgr::newWave () {
 	numLiveEnemies += 20;
 	timeToWave = 10;
 	waveClock.Reset();
+
+	Sound::play(Sound::newWave);
 }
 
 ph::vec2f EnemyMgr::randomCornerPosition () {

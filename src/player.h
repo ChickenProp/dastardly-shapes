@@ -17,6 +17,7 @@ public:
 	float timeToHalf;
 
 	int ammo;
+	int maxAmmo;
 	float rateOfFire;
 	float rateOfDryFire;
 	sf::Clock shotClock;
