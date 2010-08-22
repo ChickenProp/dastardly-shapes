@@ -2,24 +2,15 @@
 #define GW_ENEMY_H
 
 #include "includes.h"
+#include "entity.h"
 
-class Enemy {
+class Enemy : public Entity {
 public:
-	sf::Sprite sprite;
-	float radius;
-
-	ph::vec2f pos;
-	ph::vec2f vel;
-	ph::vec2f acc;
-
 	int health;
 	int ammoValue;
 
 	bool dead;
 	float diedAt;
-
-	virtual void update()=0;
-	virtual void render()=0;
 };
 
 #endif

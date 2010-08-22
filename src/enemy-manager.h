@@ -8,7 +8,7 @@ class EnemyMgr {
 public:
 	EnemyMgr();
 
-	std::vector<Enemy*> enemies;
+	std::vector<Enemy*> list;
 
 	void update();
 	void render();

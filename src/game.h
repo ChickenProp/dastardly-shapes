@@ -22,6 +22,8 @@ public:
 	std::vector<Bullet*> bullets;
 
 	EnemyMgr *enemies;
+
+	void handleCollisions();
 };
 
 #endif

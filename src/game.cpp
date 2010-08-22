@@ -22,6 +22,8 @@ void Game::update() {
 	}
 
 	enemies->update();
+
+	handleCollisions();
 }
 
 void Game::render() {
@@ -61,3 +63,14 @@ void Game::handleEvent(sf::Event e) {
 	}
 }
 
+void Game::handleCollisions() {
+	for(std::vector<Enemy*>::iterator it = enemies->list.begin();
+	    it != enemies->list.end(); it++)
+	{
+		if (! *it)
+			continue;
+
+		if ((*it)->colliding(player))
+			exit(1);
+	}
+}

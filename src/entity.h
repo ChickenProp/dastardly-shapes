@@ -14,6 +14,8 @@ public:
 
 	virtual void update();
 	virtual void render();
+
+	bool colliding(Entity *other);
 };
 
 #endif

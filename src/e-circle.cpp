@@ -21,8 +21,3 @@ void E_Circle::update () {
 
 	pos += vel;
 }
-
-void E_Circle::render () {
-	sprite.SetPosition(pos);
-	G::window.Draw(sprite);
-}
