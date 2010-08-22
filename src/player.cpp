@@ -5,7 +5,7 @@
 
 Player::Player ()
 	: maxSpeed(640), // pixels per second
-	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
+	  timeToHalf(0.2), // seconds to accelerate to maxSpeed/2
 	  maxAmmo(20),
 	  ammo(20),
 	  rateOfFire(5), // shots per second
