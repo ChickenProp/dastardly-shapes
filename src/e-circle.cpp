@@ -19,9 +19,11 @@ void E_Circle::update () {
 	if (!player)
 		return;
 
-	ph::vec2f in = (player->pos - pos).normalize();
-	ph::vec2f orb = ph::vec2f(in.y, -in.x);
-	vel = (in + 3*orb).normalize();
+	if (!dead) {
+		ph::vec2f in = (player->pos - pos).normalize();
+		ph::vec2f orb = ph::vec2f(in.y, -in.x);
+		vel = (in + 3*orb).normalize();
+	}
 
 	pos += vel;
 }
