@@ -28,6 +28,7 @@ public:
 		static sf::Image player;
 		static sf::Image bullet;
 		static sf::Image enemy_circle;
+		static sf::Image enemy_triangle;
 	};
 
 	static bool loadImages();

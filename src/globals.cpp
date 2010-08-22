@@ -15,6 +15,7 @@ sf::Image G::Images::backdrop;
 sf::Image G::Images::player;
 sf::Image G::Images::bullet;
 sf::Image G::Images::enemy_circle;
+sf::Image G::Images::enemy_triangle;
 
 Player *G::player () {
 	if (!gameScreen)
@@ -35,6 +36,7 @@ bool G::loadImages () {
 	succ = succ && G::Images::player.LoadFromFile("media/player.tga");
 	succ = succ && G::Images::bullet.LoadFromFile("media/bullet.tga");
 	succ = succ && G::Images::enemy_circle.LoadFromFile("media/enemy-circle.tga");
+	succ = succ && G::Images::enemy_triangle.LoadFromFile("media/enemy-triangle.tga");
 
 	return succ;
 }

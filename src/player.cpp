@@ -6,8 +6,8 @@
 Player::Player ()
 	: maxSpeed(640), // pixels per second
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
-	  maxAmmo(100),
-	  ammo(100),
+	  maxAmmo(20),
+	  ammo(20),
 	  rateOfFire(5), // shots per second
 	  rateOfDryFire(1), // shots per second
 	  shotClock()
@@ -39,23 +39,7 @@ void Player::update() {
 
 	acc = acc.normalize();
 
-	/* The player causes us to accelerate at a rate of A. Friction causes us
-	   to deccelerate at a rate of B*v, where v is our current velocity. If
-	   v = M, where M is our max speed, we require no acceleration. So B =
-	   A/M, and velocity is given by the differential equation
-	       dv/dt = A - v * A/M
-	   where v=0 when t=0, and v=M/2 when t=T.
-
-	   Solving this gives us A = M/T * ln(2).	   
-	*/
-
-	float M = maxSpeed / G::framerate;
-	float T = timeToHalf * G::framerate;
-	float A = M_LN2 * M / T;
-
-	acc = acc * A - vel * A / M;
-
-	vel += acc;
+	vel = accel_drag(acc, maxSpeed, timeToHalf);
 	pos += vel;
 
 	bool bounce = false;

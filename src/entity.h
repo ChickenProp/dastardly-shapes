@@ -21,6 +21,8 @@ public:
 	virtual void update();
 	virtual void render();
 
+	ph::vec2f accel_drag(ph::vec2f dir, float maxSpeed, float timeToHalf);
+
 	bool colliding(Entity *other);
 };
 

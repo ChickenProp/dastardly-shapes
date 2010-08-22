@@ -1,6 +1,7 @@
 #include "enemy-manager.h"
 #include "globals.h"
 #include "e-circle.h"
+#include "e-triangle.h"
 #include "sound.h"
 
 EnemyMgr::EnemyMgr()
@@ -49,11 +50,11 @@ void EnemyMgr::render () {
 }
 
 void EnemyMgr::newWave () {
-	for (int i = 0; i < 20; i++)
-		list.push_back(new E_Circle(randomCornerPosition()));
+	for (int i = 0; i < 5; i++)
+		list.push_back(new E_Triangle(randomCornerPosition()));
 
-	numLiveEnemies += 20;
-	timeToWave = 10;
+	numLiveEnemies += 5;
+	timeToWave = 20;
 	waveClock.Reset();
 
 	Sound::play(Sound::newWave);
