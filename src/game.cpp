@@ -72,5 +72,10 @@ void Game::handleCollisions() {
 
 		if ((*it)->colliding(player))
 			exit(1);
+
+		if ((*it)->dead)
+			continue;
+
+		(*it)->checkBulletCollisions();
 	}
 }
