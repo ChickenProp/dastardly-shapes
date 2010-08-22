@@ -78,6 +78,8 @@ void Player::shoot() {
 
 	ammo = ph::max(ammo-1, 0);
 	shotClock.Reset();
+
+	printf("ammo: %d\n", ammo);
 }
 
 void Player::hitEnemy(Enemy *enemy) {

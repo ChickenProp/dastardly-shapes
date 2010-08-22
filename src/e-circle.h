@@ -5,6 +5,8 @@
 
 class E_Circle : public Enemy {
 public:
+	typedef Enemy super;
+
 	E_Circle(ph::vec2f pos);
 	void update();
 

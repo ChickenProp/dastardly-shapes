@@ -23,7 +23,8 @@ void Enemy::checkBulletCollisions(const std::vector<Bullet*> &bullets) {
 void Enemy::die() {
 	dead = true;
 	diedAt = G::clock.GetElapsedTime();
-	sprite.SetColor(sf::Color(128, 128, 128));
+
+	G::enemyMgr()->enemyDied(this);
 }
 	
 float Enemy::deadTime() {
@@ -40,8 +41,8 @@ void Enemy::update() {
 }
 
 void Enemy::render() {
-	// Make it die before hitting 0 visibility, or we won't be able to see
-	// it for some of its dead-time.
+	// Make it really die before hitting 0 visibility, or we won't be able
+	// to see it for some of its dead-time.
 	if (dead)
 		sprite.SetColor(sf::Color(128, 128, 128,
 		                          255 - (200*deadTime()/corpseLife)));

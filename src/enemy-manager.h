@@ -12,6 +12,9 @@ public:
 
 	void update();
 	void render();
+
+	void enemyDied(Enemy *which);
+	int numLiveEnemies;
 };
 
 #endif

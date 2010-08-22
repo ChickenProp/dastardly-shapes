@@ -21,6 +21,12 @@ Player *G::player () {
 	return gameScreen->player;
 }
 
+EnemyMgr *G::enemyMgr () {
+	if (!gameScreen)
+		return NULL;
+	return gameScreen->enemies;
+}
+
 bool G::loadImages () {
 	bool succ = true;
 

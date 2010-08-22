@@ -28,5 +28,8 @@ void Entity::render () {
 }
 
 bool Entity::colliding (Entity *other) {
-	return pos.distance(other->pos) < radius + other->radius;
+	if (trash || deadPtr(other))
+		return false;
+	else
+		return pos.distance(other->pos) < radius + other->radius;
 }

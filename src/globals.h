@@ -3,9 +3,10 @@
 
 #include "includes.h"
 
-struct Screen;
-struct Game;
-struct Player;
+class Screen;
+class Game;
+class Player;
+class EnemyMgr;
 
 class G {
 public:
@@ -20,6 +21,7 @@ public:
 	static Game *gameScreen;
 
 	static Player *player();
+	static EnemyMgr *enemyMgr();
 
 	struct Images {
 		static sf::Image player;

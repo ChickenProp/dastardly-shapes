@@ -4,7 +4,14 @@
 EnemyMgr::EnemyMgr()
 	: list()
 {
-	list.push_back(new E_Circle(ph::vec2f(100, 100)));
+	for (int i = 0; i < 100; i++)
+		list.push_back(new E_Circle(ph::vec2f(100, 100)));
+
+	numLiveEnemies = 100;
+}
+
+void EnemyMgr::enemyDied(Enemy *which) {
+	numLiveEnemies--;
 }
 
 void EnemyMgr::update () {
