@@ -15,6 +15,11 @@ public:
 
 	void enemyDied(Enemy *which);
 	int numLiveEnemies;
+
+	void newWave();
+	float timeToWave;
+	sf::Clock waveClock;
+	int waveCount;
 };
 
 #endif

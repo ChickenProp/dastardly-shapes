@@ -2,19 +2,25 @@
 #include "e-circle.h"
 
 EnemyMgr::EnemyMgr()
-	: list()
+	: list(),
+	  numLiveEnemies(0),
+	  waveCount(0),
+	  waveClock()
 {
-	for (int i = 0; i < 100; i++)
-		list.push_back(new E_Circle(ph::vec2f(100, 100)));
-
-	numLiveEnemies = 100;
+	newWave();
 }
 
 void EnemyMgr::enemyDied(Enemy *which) {
 	numLiveEnemies--;
+
+	if (numLiveEnemies <= 0)
+		timeToWave = 0;
 }
 
 void EnemyMgr::update () {
+	if (waveClock.GetElapsedTime() > timeToWave)
+		newWave();
+
 	for(int i = 0; i < list.size(); i++) {
 		if (! list[i])
 			continue;
@@ -38,4 +44,13 @@ void EnemyMgr::render () {
 
 		(*it)->render();
 	}
+}
+
+void EnemyMgr::newWave () {
+	for (int i = 0; i < 100; i++)
+		list.push_back(new E_Circle(ph::vec2f(100, 100)));
+
+	numLiveEnemies += 100;
+	timeToWave = 10;
+	waveClock.Reset();
 }

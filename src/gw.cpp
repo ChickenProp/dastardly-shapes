@@ -9,7 +9,7 @@ int main (int argc, char **argv) {
 	if (! G::loadImages())
 		exit(1);
 
-	G::window.Create(sf::VideoMode(640, 480, 32), "GW");
+	G::window.Create(sf::VideoMode(550, 550, 32), "GW");
 	G::window.SetFramerateLimit(G::framerate);
 
 	G::gameScreen = new Game();
