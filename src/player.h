@@ -2,22 +2,15 @@
 #define GW_PLAYER_H
 
 #include "includes.h"
+#include "entity.h"
 
-class Player {
+class Player : public Entity {
 public:
 	Player();
 
-	sf::Image img;
-	sf::Sprite sprite;
-	float radius;
-
-	ph::vec2f pos;
-	ph::vec2f vel;
 	ph::vec2f acc;
 	float maxSpeed;
 	float timeToHalf;
-
-	float angle;
 
 	int ammo;
 	int rateOfFire;
@@ -25,7 +18,6 @@ public:
 	bool tryToShoot();
 
 	void update();
-	void render();
 };
 
 #endif

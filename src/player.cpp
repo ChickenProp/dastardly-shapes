@@ -3,21 +3,16 @@
 #include "globals.h"
 
 Player::Player ()
-	: pos(320,240),
-	  vel(0,0),
-	  acc(0,0),
-	  maxSpeed(640), // pixels per second
+	: maxSpeed(640), // pixels per second
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
-	  angle(0),
 	  ammo(100),
 	  rateOfFire(5), // shots per second
-	  timeLastShot(G::clock.GetElapsedTime()),
-	  img(),
-	  sprite(),
-	  radius(16)
+	  timeLastShot(G::clock.GetElapsedTime())
 {
-	img.LoadFromFile("media/player.tga");
-	sprite.SetImage(img);
+	pos = ph::vec2f(320, 240);
+	radius = 16;
+
+	sprite.SetImage(G::Images::player);
 	sprite.SetCenter(64, 64);
 
 	// The image has a diameter of 128, and the circular bit has a diameter
@@ -28,7 +23,7 @@ Player::Player ()
 }
 
 void Player::update() {
-	acc = ph::vec2f(0,0);
+	ph::vec2f acc(0,0);
 
 	if (G::input.IsKeyDown(sf::Key::Left))
 	        acc += ph::vec2f(-1, 0);
@@ -71,10 +66,4 @@ bool Player::tryToShoot() {
 	Bullet *bullet = new Bullet(pos + ph::vec2f::polar(radius, angle),
 	                            vel + ph::vec2f::polar(10, angle));
 	G::gameScreen->addBullet(bullet);
-}
-
-void Player::render() {
-	sprite.SetPosition(pos);
-	sprite.SetRotation(-angle); // SFML angles are opposite to expected.
-	G::window.Draw(sprite);
 }

@@ -6,6 +6,7 @@
 class Enemy {
 public:
 	sf::Sprite sprite;
+	float radius;
 
 	ph::vec2f pos;
 	ph::vec2f vel;
