@@ -24,7 +24,7 @@ public:
 	bool unvivifiedWave;
 	float timeToWave;
 	sf::Clock waveClock;
-	int waveCount;
+	int waveDifficulty;
 
 	ph::vec2f randomCornerPosition();
 };

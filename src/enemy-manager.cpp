@@ -10,7 +10,7 @@ EnemyMgr::EnemyMgr()
 	  upcoming(),
 	  glow(),
 	  numLiveEnemies(0),
-	  waveCount(0),
+	  waveDifficulty(10),
 	  waveClock()
 {
 	glow.SetImage(G::Images::glow);
@@ -23,7 +23,7 @@ EnemyMgr::EnemyMgr()
 void EnemyMgr::enemyDied(Enemy *which) {
 	numLiveEnemies--;
 
-	if (numLiveEnemies <= 0)
+	if (numLiveEnemies <= 0 && !unvivifiedWave)
 		timeToWave = 0;
 }
 
@@ -72,12 +72,25 @@ void EnemyMgr::render () {
 }
 
 void EnemyMgr::newWave () {
-	for (int i = 0; i < 5; i++)
-		upcoming.push_back(new E_Square(randomCornerPosition()));
+	for (int i = 0; i < waveDifficulty; i++) {
+		ph::vec2f pos = randomCornerPosition();
+
+		Enemy *en = NULL;
+		int type = ph::randi(ph::max(waveDifficulty/10, 1));
+		switch (type) {
+		case 0: en = new E_Circle(pos); break;
+		case 1: en = new E_Triangle(pos); break;
+		case 2: en = new E_Square(pos); break;
+		}
+
+		upcoming.push_back(en);
+		i += type;
+	}
 
 	unvivifiedWave = true;
 	timeToWave = 20;
 	waveClock.Reset();
+	waveDifficulty += 5;
 }
 
 void EnemyMgr::vivifyWave () {
