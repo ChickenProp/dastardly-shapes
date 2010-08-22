@@ -7,7 +7,8 @@ Player::Player ()
 	  timeToHalf(0.5), // seconds to accelerate to maxSpeed/2
 	  ammo(100),
 	  rateOfFire(5), // shots per second
-	  timeLastShot(G::clock.GetElapsedTime())
+	  rateOfDryFire(1), // shots per second
+	  shotClock()
 {
 	pos = ph::vec2f(320, 240);
 	radius = 16;
@@ -58,20 +59,16 @@ void Player::update() {
 	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );
 	angle = (mouse - pos).angle();
 
-	if (G::input.IsMouseButtonDown(sf::Mouse::Left))
-		tryToShoot();
+	if (G::input.IsMouseButtonDown(sf::Mouse::Left)
+	    && canShoot())
+		shoot();
 }
 
-bool Player::tryToShoot() {
-	if (G::clock.GetElapsedTime() - timeLastShot > 1.0/rateOfFire
-	    && ammo > 0)
-	{
-		shoot();
-		return true;
-	}
+bool Player::canShoot() {
+	if (ammo > 0)
+		return shotClock.GetElapsedTime() > 1.0/rateOfFire;
 	else
-		return false;
-
+		return shotClock.GetElapsedTime() > 1.0/rateOfDryFire;
 }
 
 void Player::shoot() {
@@ -79,8 +76,8 @@ void Player::shoot() {
 	                            vel + ph::vec2f::polar(10, angle));
 	G::gameScreen->addBullet(bullet);
 
-	ammo--;
-	timeLastShot = G::clock.GetElapsedTime();
+	ammo = ph::max(ammo-1, 0);
+	shotClock.Reset();
 }
 
 void Player::hitEnemy(Enemy *enemy) {

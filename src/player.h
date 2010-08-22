@@ -17,9 +17,10 @@ public:
 	float timeToHalf;
 
 	int ammo;
-	int rateOfFire;
-	float timeLastShot;
-	bool tryToShoot();
+	float rateOfFire;
+	float rateOfDryFire;
+	sf::Clock shotClock;
+	bool canShoot();
 	void shoot();
 
 	void update();
