@@ -11,5 +11,7 @@ Bullet::Bullet (ph::vec2f _pos, ph::vec2f _vel) {
 }
 
 void Bullet::update () {
+	super::update();
+
 	pos += vel;
 }

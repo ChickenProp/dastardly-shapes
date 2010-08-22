@@ -8,6 +8,8 @@ class Bullet;
 
 class Enemy : public Entity {
 public:
+	typedef Entity super;
+
 	Enemy();
 
 	int health;
@@ -16,7 +18,10 @@ public:
 	bool dead;
 	float diedAt;
 
-	void checkBulletCollisions();
+	void checkBulletCollisions(const std::vector<Bullet*> &bullets);
+	void die();
+
+	virtual void update();
 };
 
 #endif

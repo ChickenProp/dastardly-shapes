@@ -6,6 +6,8 @@
 
 class Bullet : public Entity {
 public:
+	typedef Entity super;
+
 	Bullet(ph::vec2f pos, ph::vec2f vel);
 	
 	void update();

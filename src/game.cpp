@@ -24,6 +24,13 @@ void Game::update() {
 	enemies->update();
 
 	handleCollisions();
+
+	for (int i = 0; i < bullets.size(); i++) {
+		if (bullets[i] && bullets[i]->trash) {
+			delete bullets[i];
+			bullets[i] = 0;
+		}
+	}
 }
 
 void Game::render() {
@@ -76,6 +83,6 @@ void Game::handleCollisions() {
 		if ((*it)->dead)
 			continue;
 
-		(*it)->checkBulletCollisions();
+		(*it)->checkBulletCollisions(bullets);
 	}
 }

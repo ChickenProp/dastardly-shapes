@@ -8,13 +8,17 @@ EnemyMgr::EnemyMgr()
 }
 
 void EnemyMgr::update () {
-	for(std::vector<Enemy*>::iterator it = list.begin();
-	    it != list.end(); it++)
-	{
-		if (! *it)
+	for(int i = 0; i < list.size(); i++) {
+		if (! list[i])
 			continue;
 
-		(*it)->update();
+		if (list[i]->trash) {
+			delete list[i];
+			list[i] = NULL;
+			continue;
+		}
+
+		list[i]->update();
 	}
 }
 

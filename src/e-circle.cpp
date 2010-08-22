@@ -11,6 +11,8 @@ E_Circle::E_Circle (ph::vec2f _pos) {
 }
 
 void E_Circle::update () {
+	Enemy::update();
+
 	Player *player = G::player();
 	if (!player)
 		return;

@@ -1,9 +1,21 @@
 #include "entity.h"
 #include "globals.h"
 
-void Entity::update () {}
+Entity::Entity ()
+	: trash(false)
+{}
+
+void Entity::markTrash () {
+	trash = true;
+}
+
+void Entity::update () {
+	if (trash) return;
+}
 
 void Entity::render () {
+	if (trash) return;
+
 	sprite.SetPosition(pos);
 	sprite.SetRotation(-angle); // SFML angles are opposite to expected.
 	G::window.Draw(sprite);
