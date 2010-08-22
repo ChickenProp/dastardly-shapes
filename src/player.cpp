@@ -58,6 +58,28 @@ void Player::update() {
 	vel += acc;
 	pos += vel;
 
+	int width = G::window.GetWidth();
+	int height = G::window.GetHeight();
+	float rest = 0.8f;
+
+	if (pos.x - radius <= 0) {
+		vel = ph::vec2f(-vel.x*rest, vel.y);
+		pos.x = radius;
+	}
+	else if (pos.x + radius >= width) {
+		vel = ph::vec2f(-vel.x*rest, vel.y);
+		pos.x = width - radius;
+	}
+
+	if (pos.y - radius <= 0) {
+		vel = ph::vec2f(vel.x, -vel.y*rest);
+		pos.y = radius;
+	}
+	else if (pos.y + radius >= height) {
+		vel = ph::vec2f(vel.x, -vel.y*rest);
+		pos.y = height - radius;
+	}
+
 	ph::vec2f mouse( G::input.GetMouseX(), G::input.GetMouseY() );
 	angle = (mouse - pos).angle();
 
