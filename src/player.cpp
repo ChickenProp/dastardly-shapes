@@ -63,9 +63,24 @@ void Player::update() {
 }
 
 bool Player::tryToShoot() {
+	if (G::clock.GetElapsedTime() - timeLastShot > 1.0/rateOfFire
+	    && ammo > 0)
+	{
+		shoot();
+		return true;
+	}
+	else
+		return false;
+
+}
+
+void Player::shoot() {
 	Bullet *bullet = new Bullet(pos + ph::vec2f::polar(radius, angle),
 	                            vel + ph::vec2f::polar(10, angle));
 	G::gameScreen->addBullet(bullet);
+
+	ammo--;
+	timeLastShot = G::clock.GetElapsedTime();
 }
 
 void Player::hitEnemy(Enemy *enemy) {

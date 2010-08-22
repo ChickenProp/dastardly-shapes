@@ -18,8 +18,9 @@ public:
 
 	int ammo;
 	int rateOfFire;
-	int timeLastShot;
+	float timeLastShot;
 	bool tryToShoot();
+	void shoot();
 
 	void update();
 
