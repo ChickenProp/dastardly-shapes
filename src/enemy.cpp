@@ -2,6 +2,7 @@
 #include "bullet.h"
 #include "globals.h"
 #include "game.h"
+#include "sound.h"
 
 Enemy::Enemy ()
 	: dead(0)
@@ -25,6 +26,7 @@ void Enemy::die() {
 	diedAt = G::clock.GetElapsedTime();
 
 	G::enemyMgr()->enemyDied(this);
+	Sound::play(Sound::enemyKill);
 }
 	
 float Enemy::deadTime() {

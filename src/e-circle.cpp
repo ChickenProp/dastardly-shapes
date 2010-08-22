@@ -3,7 +3,8 @@
 #include "player.h"
 
 E_Circle::E_Circle (ph::vec2f _pos)
-	: winding(ph::randi(2)*2 - 1)
+	: winding(ph::randi(2)*2 - 1),
+	  fallrate(ph::randf(3) + 1)	  
 {
 	pos = _pos;
 	radius = 8;
@@ -24,7 +25,7 @@ void E_Circle::update () {
 	if (!dead) {
 		ph::vec2f in = (player->pos - pos).normalize();
 		ph::vec2f orb = winding * ph::vec2f(in.y, -in.x);
-		vel = (in + 3*orb).normalize();
+		vel = (in + fallrate*orb).normalize();
 	}
 
 	pos += vel;

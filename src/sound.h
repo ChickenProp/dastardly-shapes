@@ -13,6 +13,7 @@ public:
 	static sf::SoundBuffer *shoot;
 	static sf::SoundBuffer *newWave;
 	static sf::SoundBuffer *pickupEnemy;
+	static sf::SoundBuffer *enemyKill;
 };
 
 #endif

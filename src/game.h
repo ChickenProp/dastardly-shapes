@@ -16,6 +16,8 @@ public:
 	void handleEvents();
 	void handleEvent(sf::Event e);
 
+	sf::Sprite backdrop;
+
 	Player *player;
 
 	void addBullet(Bullet* bullet);

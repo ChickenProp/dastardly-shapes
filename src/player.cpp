@@ -12,7 +12,7 @@ Player::Player ()
 	  rateOfDryFire(1), // shots per second
 	  shotClock()
 {
-	pos = ph::vec2f(225, 225);
+	pos = ph::vec2f(285, 285);
 	radius = 16;
 
 	sprite.SetImage(G::Images::player);

@@ -11,7 +11,7 @@ int main (int argc, char **argv) {
 		exit(1);
 	Sound::loadSounds();
 
-	G::window.Create(sf::VideoMode(550, 550, 32), "Dastardly Shapes");
+	G::window.Create(sf::VideoMode(570, 570, 32), "Dastardly Shapes");
 	G::window.SetFramerateLimit(G::framerate);
 
 	G::gameScreen = new Game();

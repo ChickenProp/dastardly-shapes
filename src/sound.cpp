@@ -5,6 +5,7 @@ std::list<sf::Sound*> Sound::sounds;
 sf::SoundBuffer *Sound::shoot;
 sf::SoundBuffer *Sound::newWave;
 sf::SoundBuffer *Sound::pickupEnemy;
+sf::SoundBuffer *Sound::enemyKill;
 
 void Sound::play(sf::SoundBuffer *buf, bool loop, float pitch, float vol) {
 	if (!buf) return;
@@ -25,4 +26,5 @@ void Sound::loadSounds () {
 	LOADSOUND(shoot, "shoot");
 	LOADSOUND(newWave, "new-wave");
 	LOADSOUND(pickupEnemy, "pickup-enemy");
+	LOADSOUND(enemyKill, "enemy-kill");
 }

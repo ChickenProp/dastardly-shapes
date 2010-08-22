@@ -11,6 +11,7 @@ public:
 	void update();
 
 	int winding;
+	float fallrate;
 };
 
 #endif

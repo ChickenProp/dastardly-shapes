@@ -3,8 +3,10 @@
 Game::Game()
 	: player(new Player()),
 	  bullets(),
-	  enemies(new EnemyMgr())
+	  enemies(new EnemyMgr()),
+	  backdrop()
 {
+	backdrop.SetImage(G::Images::backdrop);
 }
 
 void Game::update() {
@@ -34,6 +36,8 @@ void Game::update() {
 }
 
 void Game::render() {
+	G::window.Draw(backdrop);
+
 	player->render();
 
 	for(std::vector<Bullet*>::iterator it = bullets.begin();
