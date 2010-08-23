@@ -16,6 +16,7 @@ public:
 	static sf::SoundBuffer *pickupEnemy;
 	static sf::SoundBuffer *enemyHit;
 	static sf::SoundBuffer *enemyKill;
+	static sf::SoundBuffer *playerDeath;
 };
 
 #endif

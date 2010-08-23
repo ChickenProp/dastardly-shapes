@@ -1,11 +1,13 @@
 #ifndef GW_GAME_H
 #define GW_GAME_H
 
-#include "globals.h"
 #include "screen.h"
-#include "player.h"
-#include "bullet.h"
-#include "enemy-manager.h"
+#include "includes.h"
+
+class Player;
+class Bullet;
+class EnemyMgr;
+class GameOver;
 
 class Game : public Screen {
 public:
@@ -26,6 +28,11 @@ public:
 	EnemyMgr *enemies;
 
 	void handleCollisions();
+
+	bool isGameOver;
+	sf::Clock gameOverClock;
+	void gameOver();
+	GameOver *gameOverScreen;
 };
 
 #endif

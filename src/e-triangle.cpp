@@ -8,6 +8,7 @@ E_Triangle::E_Triangle(ph::vec2f _pos) {
 	ammoCount = 10;
 	radius = 8;
 	corpseLife = 10;
+	score = 15;
 	rotationSpeed = 360; // degrees per second
 
 	sprite.SetImage(G::Images::enemy_triangle);

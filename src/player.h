@@ -12,6 +12,8 @@ public:
 
 	Player();
 
+	int score;
+
 	ph::vec2f acc;
 	float maxSpeed;
 	float timeToHalf;

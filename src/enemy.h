@@ -15,6 +15,8 @@ public:
 	int health;
 	int ammoCount;
 
+	int score;
+
 	bool dead;
 	float diedAt;
 	float corpseLife;

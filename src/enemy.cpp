@@ -1,5 +1,7 @@
 #include "enemy.h"
+#include "player.h"
 #include "bullet.h"
+#include "enemy-manager.h"
 #include "globals.h"
 #include "game.h"
 #include "sound.h"
@@ -34,6 +36,9 @@ void Enemy::die() {
 	dead = true;
 	diedAt = G::clock.GetElapsedTime();
 
+	if (G::player())
+		G::player()->score += score;
+
 	G::enemyMgr()->enemyDied(this);
 	Sound::play(Sound::enemyKill);
 }
@@ -46,9 +51,11 @@ void Enemy::update() {
 	super::update();
 
 	if (dead && deadTime() > corpseLife) {
-		printf("enemy dies\n");
 		markTrash();
 	}
+
+	if (! G::player())
+		pos += vel;
 }
 
 void Enemy::render() {

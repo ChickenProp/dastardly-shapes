@@ -1,10 +1,13 @@
 #include "player.h"
+#include "bullet.h"
+#include "enemy.h"
 #include "game.h"
 #include "globals.h"
 #include "sound.h"
 
 Player::Player ()
-	: maxSpeed(640), // pixels per second
+	: score(0),
+	  maxSpeed(640), // pixels per second
 	  timeToHalf(0.2), // seconds to accelerate to maxSpeed/2
 	  maxAmmo(20),
 	  ammo(20),
@@ -13,7 +16,7 @@ Player::Player ()
 	  shotClock()
 {
 	pos = ph::vec2f(285, 285);
-	radius = 16;
+	radius = 12;
 
 	sprite.SetImage(G::Images::player);
 	sprite.SetCenter(64, 64);
@@ -108,11 +111,13 @@ void Player::shoot() {
 }
 
 void Player::hitEnemy(Enemy *enemy) {
-	if (! enemy->dead)
-		exit(1);
+	if (! enemy->dead) {
+		G::gameScreen->gameOver();
+	}
 	else {
 		ammo += enemy->ammoCount;
 		ammo = ph::min(ammo, maxAmmo);
+		score += enemy->score;
 		enemy->markTrash();
 		Sound::play(Sound::pickupEnemy);
 	}

@@ -11,7 +11,8 @@ EnemyMgr::EnemyMgr()
 	  glow(),
 	  numLiveEnemies(0),
 	  waveDifficulty(10),
-	  waveClock()
+	  waveClock(),
+	  stopped(false)
 {
 	glow.SetImage(G::Images::glow);
 	glow.SetCenter(64, 64);
@@ -28,7 +29,7 @@ void EnemyMgr::enemyDied(Enemy *which) {
 }
 
 void EnemyMgr::update () {
-	if (waveClock.GetElapsedTime() > timeToWave)
+	if (waveClock.GetElapsedTime() > timeToWave && !stopped)
 		newWave();
 
 	if (unvivifiedWave && waveClock.GetElapsedTime() >= 1)

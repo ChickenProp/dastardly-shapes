@@ -8,6 +8,7 @@ E_Square::E_Square (ph::vec2f _pos) {
 	corpseLife = 5;
 	radius = 8;
 	health = 3;
+	score = 20;
 
 	sprite.SetImage(G::Images::enemy_square);
 	sprite.SetCenter(64, 64);

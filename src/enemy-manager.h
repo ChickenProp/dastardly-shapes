@@ -27,6 +27,8 @@ public:
 	int waveDifficulty;
 
 	ph::vec2f randomCornerPosition();
+
+	bool stopped;
 };
 
 #endif
