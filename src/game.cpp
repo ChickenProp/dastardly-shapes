@@ -20,8 +20,6 @@ Game::Game()
 	  curParts(&parts1)
 {
 	backdrop.SetImage(G::Images::backdrop);
-
-	addParticles(ph::vec2f(200, 200), ph::vec2f(0.5, 0.3), 50);
 }
 
 void Game::update() {
