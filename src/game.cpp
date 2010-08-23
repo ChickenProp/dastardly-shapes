@@ -5,6 +5,7 @@
 #include "enemy-manager.h"
 #include "sound.h"
 #include "gameover.h"
+#include "particle.h"
 
 Game::Game()
 	: player(new Player()),
@@ -13,9 +14,17 @@ Game::Game()
 	  backdrop(),
 	  isGameOver(false),
 	  gameOverClock(),
-	  gameOverScreen(NULL)
+	  gameOverScreen(NULL),
+	  parts1(),
+	  parts2(),
+	  curParts(&parts1)
 {
 	backdrop.SetImage(G::Images::backdrop);
+
+	parts1.push_back(Particle(ph::vec2f(125, 125), ph::vec2f(1,0)));
+	parts1.push_back(Particle(ph::vec2f(120, 125), ph::vec2f(0,0)));
+	parts1.push_back(Particle(ph::vec2f(120, 120), ph::vec2f(0,0)));
+	parts1.push_back(Particle(ph::vec2f(125, 120), ph::vec2f(0,0)));
 }
 
 void Game::update() {
@@ -53,10 +62,10 @@ void Game::update() {
 }
 
 void Game::render() {
-	G::window.Draw(backdrop);
+	//G::window.Draw(backdrop);
 
 	if (player)
-		player->render();
+		//	player->render();
 
 	for(std::vector<Bullet*>::iterator it = bullets.begin();
 	    it != bullets.end(); it++)
@@ -64,10 +73,12 @@ void Game::render() {
 		if (! *it)
 			continue;
 
-		(*it)->render();
+		//(*it)->render();
 	}
 
-	enemies->render();
+	//enemies->render();
+
+	renderParts();
 
 	if (isGameOver) {
 		int alpha = ph::min<int>(gameOverClock.GetElapsedTime() * 128,
@@ -78,6 +89,23 @@ void Game::render() {
 			                       sf::Color(0, 0, 0, alpha));
 		G::window.Draw(overlay);
 	}
+}
+
+void Game::renderParts () {
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, 570, 570, 0, -1, 1);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	int stride = sizeof(Particle);
+
+	glVertexPointer(2, GL_FLOAT, stride, &parts1[0].pos);
+	glColorPointer(4, GL_UNSIGNED_SHORT, stride, &parts1[0].color);
+	glDrawArrays(GL_POINTS, 0, parts1.size());	
 }
 
 void Game::addBullet(Bullet *bullet) {

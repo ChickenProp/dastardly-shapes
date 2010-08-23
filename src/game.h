@@ -8,6 +8,7 @@ class Player;
 class Bullet;
 class EnemyMgr;
 class GameOver;
+class Particle;
 
 class Game : public Screen {
 public:
@@ -24,6 +25,16 @@ public:
 
 	void addBullet(Bullet* bullet);
 	std::vector<Bullet*> bullets;
+
+	std::vector<Particle> parts1;
+	std::vector<Particle> parts2;
+	std::vector<Particle> *curParts;
+	sf::Clock partsClock;
+	void gcParts();
+	void updateParts();
+	void renderParts();
+	void addParticles(ph::vec2f pos, ph::vec2f vel,
+	                  int count, float spray=20);
 
 	EnemyMgr *enemies;
 
