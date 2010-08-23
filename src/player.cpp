@@ -107,7 +107,11 @@ void Player::shoot() {
 
 	printf("ammo: %d\n", ammo);
 
-	Sound::play(Sound::shoot, false, 2.0 - (float)ammo/maxAmmo);
+	float pitch = (ammo * 10 < maxAmmo ? 2.0
+	               : ammo * 4 < maxAmmo ? 1.3
+	               : 1.0);
+
+	Sound::play(Sound::shoot, false, pitch);
 }
 
 void Player::hitEnemy(Enemy *enemy) {
