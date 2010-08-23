@@ -33,7 +33,7 @@ public:
 	void updateParts();
 	void renderParts();
 	void addParticles(ph::vec2f pos, ph::vec2f vel,
-	                  int count, float spray=20);
+	                  int count, float spray=20, GLushort drop=255);
 
 	EnemyMgr *enemies;
 

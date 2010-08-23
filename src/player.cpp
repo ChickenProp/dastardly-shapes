@@ -43,6 +43,9 @@ void Player::update() {
 	acc = acc.normalize();
 
 	vel = accel_drag(acc, maxSpeed, timeToHalf);
+
+	G::gameScreen->addParticles(pos, -vel, 1, 100, 5000);
+	
 	pos += vel;
 
 	bool bounce = false;

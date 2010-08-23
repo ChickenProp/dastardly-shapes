@@ -72,15 +72,20 @@ void Game::updateParts () {
 	}
 }
 
-void Game::addParticles(ph::vec2f pos, ph::vec2f vel, int count, float spray) {
+void Game::addParticles(ph::vec2f pos, ph::vec2f vel, int count,
+                        float spray, GLushort drop)
+{
 	float r = vel.length();
+	if (r == 0)
+		return;
 	float thetamin = vel.angle() - spray/2;
 
 	for (int i = 0; i < count; i++) {
 		float d = ph::randf(2*r);
 		float t = ph::randf(spray) + thetamin;
 
-		curParts->push_back(Particle(pos, ph::vec2f::polar(d, t)));
+		curParts->push_back(Particle(pos, ph::vec2f::polar(d, t),
+		                             drop));
 	}
 }
 

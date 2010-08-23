@@ -59,6 +59,8 @@ void Enemy::update() {
 
 	if (! G::player())
 		pos += vel;
+
+	G::gameScreen->addParticles(pos, -vel, 1, 100, 5000);
 }
 
 void Enemy::render() {
