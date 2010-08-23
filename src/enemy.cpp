@@ -19,6 +19,9 @@ void Enemy::checkBulletCollisions(const std::vector<Bullet*> &bullets) {
 		if (! bullets[i] || ! colliding(bullets[i]))
 			continue;
 
+		float angle = bullets[i]->vel.angle();
+	        G::gameScreen->addParticles(pos, bullets[i]->vel / 10,//ph::vec2f::polar(1, angle),
+		                            50);
 		getHit();
 		bullets[i]->markTrash();
 	}

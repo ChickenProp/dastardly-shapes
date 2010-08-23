@@ -30,7 +30,6 @@ public:
 	std::vector<Particle> parts2;
 	std::vector<Particle> *curParts;
 	sf::Clock partsClock;
-	void gcParts();
 	void updateParts();
 	void renderParts();
 	void addParticles(ph::vec2f pos, ph::vec2f vel,

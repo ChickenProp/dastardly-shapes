@@ -112,6 +112,10 @@ void Player::shoot() {
 
 void Player::hitEnemy(Enemy *enemy) {
 	if (! enemy->dead) {
+		angle = (pos - enemy->pos).angle();
+		
+		G::gameScreen->addParticles(pos, ph::vec2f::polar(2, angle),
+		                            500, 120);
 		G::gameScreen->gameOver();
 	}
 	else {

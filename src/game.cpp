@@ -21,10 +21,7 @@ Game::Game()
 {
 	backdrop.SetImage(G::Images::backdrop);
 
-	parts1.push_back(Particle(ph::vec2f(125, 125), ph::vec2f(1,0)));
-	parts1.push_back(Particle(ph::vec2f(120, 125), ph::vec2f(0,0)));
-	parts1.push_back(Particle(ph::vec2f(120, 120), ph::vec2f(0,0)));
-	parts1.push_back(Particle(ph::vec2f(125, 120), ph::vec2f(0,0)));
+	addParticles(ph::vec2f(200, 200), ph::vec2f(0.5, 0.3), 50);
 }
 
 void Game::update() {
@@ -59,13 +56,41 @@ void Game::update() {
 			bullets[i] = 0;
 		}
 	}
+
+	updateParts();
+}
+
+void Game::updateParts () {
+	for (int i = 0; i < parts1.size(); i++)
+		parts1[i].update();
+
+	for (int i = 0; i < parts2.size(); i++)
+		parts2[i].update();
+
+	if (partsClock.GetElapsedTime() >= 5) {
+		curParts = (curParts == &parts1 ? &parts2 : &parts1);
+		curParts->clear();
+		partsClock.Reset();
+	}
+}
+
+void Game::addParticles(ph::vec2f pos, ph::vec2f vel, int count, float spray) {
+	float r = vel.length();
+	float thetamin = vel.angle() - spray/2;
+
+	for (int i = 0; i < count; i++) {
+		float d = ph::randf(2*r);
+		float t = ph::randf(spray) + thetamin;
+
+		curParts->push_back(Particle(pos, ph::vec2f::polar(d, t)));
+	}
 }
 
 void Game::render() {
-	//G::window.Draw(backdrop);
+	G::window.Draw(backdrop);
 
 	if (player)
-		//	player->render();
+		player->render();
 
 	for(std::vector<Bullet*>::iterator it = bullets.begin();
 	    it != bullets.end(); it++)
@@ -73,10 +98,10 @@ void Game::render() {
 		if (! *it)
 			continue;
 
-		//(*it)->render();
+		(*it)->render();
 	}
 
-	//enemies->render();
+	enemies->render();
 
 	renderParts();
 
@@ -104,8 +129,12 @@ void Game::renderParts () {
 	int stride = sizeof(Particle);
 
 	glVertexPointer(2, GL_FLOAT, stride, &parts1[0].pos);
-	glColorPointer(4, GL_UNSIGNED_SHORT, stride, &parts1[0].color);
+	glColorPointer(4, GL_UNSIGNED_SHORT, stride, &parts1[0].r);
 	glDrawArrays(GL_POINTS, 0, parts1.size());	
+
+	glVertexPointer(2, GL_FLOAT, stride, &parts2[0].pos);
+	glColorPointer(4, GL_UNSIGNED_SHORT, stride, &parts2[0].r);
+	glDrawArrays(GL_POINTS, 0, parts2.size());	
 }
 
 void Game::addBullet(Bullet *bullet) {
