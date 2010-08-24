@@ -127,6 +127,8 @@ void Game::renderParts () {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
+	glBindTexture(GL_TEXTURE_2D, 0);
+
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
 
