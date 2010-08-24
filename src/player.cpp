@@ -108,8 +108,6 @@ void Player::shoot() {
 	ammo = ph::max(ammo-1, 0);
 	shotClock.Reset();
 
-	printf("ammo: %d\n", ammo);
-
 	float pitch = (ammo * 10 < maxAmmo ? 2.0
 	               : ammo * 4 < maxAmmo ? 1.3
 	               : 1.0);
