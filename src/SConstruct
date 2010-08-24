@@ -5,6 +5,6 @@ if int(debug):
     env.Append(CCFLAGS = '-g')
     env.Append(CPPDEFINES = 'DEBUG')
 
-env.Program("#gw", Glob('*.cpp'),
+env.Program("#dastardly-shapes", Glob('*.cpp'),
             LIBS=['GL', 'GLU', 'sfml-system', 'sfml-window', 'sfml-graphics',
                   'sfml-audio'])
