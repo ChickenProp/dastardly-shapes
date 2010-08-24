@@ -10,12 +10,18 @@ sf::SoundBuffer *Sound::enemyHit;
 sf::SoundBuffer *Sound::enemyKill;
 sf::SoundBuffer *Sound::playerDeath;
 
+bool isStopped(sf::Sound *snd) {
+	return snd->GetStatus() == sf::Sound::Stopped;
+}
+
 void Sound::play(sf::SoundBuffer *buf, bool loop, float pitch, float vol) {
 	if (!buf) return;
 
 	sf::Sound *snd = new sf::Sound(*buf, loop, pitch, vol);
 	snd->Play();
 	sounds.push_front(snd);
+
+	sounds.remove_if(&isStopped);
 }
 
 #define LOADSOUND(var,file)					\
