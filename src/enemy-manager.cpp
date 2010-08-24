@@ -81,7 +81,7 @@ void EnemyMgr::newWave () {
 		switch (type) {
 		case 1: en = new E_Circle(pos); break;
 		case 2: en = new E_Triangle(pos); break;
-		case 3: en = new E_Square(pos); break;
+		case 3: default: en = new E_Square(pos); break;
 		}
 
 		upcoming.push_back(en);
