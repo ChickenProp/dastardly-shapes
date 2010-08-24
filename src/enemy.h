@@ -18,9 +18,8 @@ public:
 	int score;
 
 	bool dead;
-	float diedAt;
+	sf::Clock deadClock;
 	float corpseLife;
-	float deadTime();
 	void die();
 
 	void checkBulletCollisions(const std::vector<Bullet*> &bullets);

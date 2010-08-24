@@ -39,6 +39,7 @@ public:
 
 	void handleCollisions();
 
+	sf::Clock clock;
 	bool isGameOver;
 	sf::Clock gameOverClock;
 	void gameOver();

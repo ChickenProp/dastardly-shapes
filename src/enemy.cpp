@@ -8,6 +8,7 @@
 
 Enemy::Enemy ()
 	: dead(0),
+	  deadClock(),
 	  health(1) // default
 {}
 
@@ -37,7 +38,7 @@ void Enemy::getHit () {
 
 void Enemy::die() {
 	dead = true;
-	diedAt = G::clock.GetElapsedTime();
+	deadClock.Reset();
 
 	if (G::player())
 		G::player()->score += score;
@@ -46,14 +47,10 @@ void Enemy::die() {
 	Sound::play(Sound::enemyKill);
 }
 	
-float Enemy::deadTime() {
-	return G::clock.GetElapsedTime() - diedAt;
-}
-
 void Enemy::update() {
 	super::update();
 
-	if (dead && deadTime() > corpseLife) {
+	if (dead && deadClock.GetElapsedTime() > corpseLife) {
 		markTrash();
 	}
 
@@ -66,9 +63,10 @@ void Enemy::update() {
 void Enemy::render() {
 	// Make it really die before hitting 0 visibility, or we won't be able
 	// to see it for some of its dead-time.
-	if (dead)
-		sprite.SetColor(sf::Color(128, 128, 128,
-		                          255 - (200*deadTime()/corpseLife)));
+	if (dead) {
+		float alpha = 255 - (200*deadClock.GetElapsedTime()/corpseLife);
+		sprite.SetColor(sf::Color(128, 128, 128, alpha));
+	}		                          
 
 	super::render();
 }

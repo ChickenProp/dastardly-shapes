@@ -12,6 +12,7 @@ Game::Game()
 	  bullets(),
 	  enemies(new EnemyMgr()),
 	  backdrop(),
+	  clock(),
 	  isGameOver(false),
 	  gameOverClock(),
 	  gameOverScreen(NULL),
@@ -182,7 +183,7 @@ void Game::handleCollisions() {
 void Game::gameOver() {
 	isGameOver = true;
 	gameOverClock.Reset();
-	gameOverScreen = new GameOver(player->score, G::clock.GetElapsedTime());
+	gameOverScreen = new GameOver(player->score, clock.GetElapsedTime());
 
 	enemies->stopped = true; // halt production
 
